@@ -289,6 +289,24 @@ public class Vec2D implements Comparable<ReadonlyVec2D>, ReadonlyVec2D {
         return +1;
     }
 
+    public int compareTo_TopLeft(ReadonlyVec2D v) {
+        float top_downDiff = y - v.y();
+        float left_rightDiff = x - v.x();
+        if (top_downDiff < 0) {
+            return -1;
+        } else if (top_downDiff > 0) {
+            return +1;
+        } else {
+            if (left_rightDiff < 0) {
+                return -1;
+            } else if (left_rightDiff > 0) {
+                return +1;
+            } else {
+                return 0;
+            }
+        }
+    }
+
     /**
      * Constraints this vector to the perimeter of the given polygon. Unlike the
      * {@link #constrain(Rect)} version of this method, this version DOES NOT

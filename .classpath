@@ -13,7 +13,7 @@
 	<classpathentry including="../src.core/**/*.java|toxi/**/*.java" kind="src" path="src.volume"/>
 	<classpathentry including="**/*.java|../lib/core.jar|../src.core/toxi/**/*.java" kind="src" path="src.p5"/>
 	<classpathentry including="../src.core/toxi/**/*.java|toxi/**/*.java" kind="src" path="src.newmesh"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3.8.1"/>
 	<classpathentry kind="lib" path="lib/core.jar"/>
 	<classpathentry kind="lib" path="lib/args4j-2.0.8.jar"/>

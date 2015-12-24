@@ -32,7 +32,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
+import toxi.geom.Line2D;
 import toxi.geom.Polygon2D;
 import toxi.geom.Triangle2D;
 import toxi.geom.Vec2D;
@@ -65,6 +68,27 @@ public class Voronoi {
         for (Vec2D p : points) {
             addPoint(p);
         }
+    }
+
+    public List<Line2D> getAllEdges() {
+        // TODO
+        // Hash regions...
+        List<Polygon2D> regions = getRegions();
+        /*
+         * just wanted to get crazy with that monster. first map collection gets
+         * List<List<Line2D , which are all Edges of all regions. these are the
+         * flatterned in order to get one list<Line2D
+         */
+        List<Line2D> allEdges = regions.stream().map(Polygon2D::getLines)
+                .collect(Collectors.toList()).stream().flatMap(l -> l.stream())
+                .collect(Collectors.toList());
+        // filter so we only have each Edge once
+        TreeSet<Line2D> sortedEdges = new TreeSet<>();
+        allEdges.stream().forEach(e -> sortedEdges.add(e));
+        sortedEdges.forEach(System.out::println);
+        System.out.println("all: " + allEdges.size() + ", sorted: "
+                + sortedEdges.size());
+        return new ArrayList<Line2D>(sortedEdges);
     }
 
     public List<Polygon2D> getRegions() {

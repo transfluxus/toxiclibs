@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import toxi.geom.Line2D.LineIntersection.Type;
 
-public class Line2D {
+public class Line2D implements Comparable<Line2D> {
 
     public static class LineIntersection {
 
@@ -180,6 +180,37 @@ public class Line2D {
         }
         // Return the point between 'a' and 'b'
         return a.add(v.scaleSelf(t));
+    }
+
+    /**
+     * Compares two lines. Main criteria is the position of the points not their
+     * distance. If a line has a point topper Left it is lower. 1st compare the
+     * topper left points of the 2 lines. If they are the same compare the
+     * bottom right point
+     */
+    public int compareTo(Line2D l) {
+        Vec2D top, bottom, lTop, lBottom;
+        if (a.y < b.y) {
+            top = a;
+            bottom = b;
+        } else {
+            top = b;
+            bottom = a;
+        }
+        if (l.a.y < l.b.y) {
+            lTop = l.a;
+            lBottom = l.b;
+        } else {
+            lTop = l.b;
+            lBottom = l.a;
+        }
+        int compareTop = top.compareTo_TopLeft(lTop);
+        if (compareTop != 0) {
+            return compareTop;
+        } else {
+            int compareBottomRight = bottom.compareTo_TopLeft(lBottom);
+            return compareBottomRight;
+        }
     }
 
     public Line2D copy() {

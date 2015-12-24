@@ -347,6 +347,16 @@ public class Polygon2D implements Shape2D, Iterable<Vec2D> {
         return edges;
     }
 
+    public List<Line2D> getLines() {
+        ArrayList<Line2D> lines = new ArrayList<Line2D>();
+        int numPoints = vertices.size();
+        for (int i = 0; i < numPoints; i++) {
+            lines.add(new Line2D(vertices.get(i), vertices.get((i + 1)
+                    % numPoints)));
+        }
+        return lines;
+    }
+
     /**
      * @see #getNumVertices()
      */
